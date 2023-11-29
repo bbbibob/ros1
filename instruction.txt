@@ -1,0 +1,33 @@
+Форум поддержки: http://roscenzura.com/threads/713/
+
+Залить папку roscomsos в корень сайта. 
+Назначить права на папку 777.
+
+Вставляем в исполняемый файл index.php вверху такой код
+
+/////////////////
+require_once("/roscomsos/roscomsos.php");
+$Roscomsos=new Roscomsos();
+$check_gos_ip=$Roscomsos->check_ip($_SERVER['REMOTE_ADDR']); 
+
+if ($check_gos_ip==true) { echo 'Извините, проводятся технические работы'; exit; }
+/////////////////
+
+Если ваш сайт статичный, то вам нужно index.html переименовать в index.php.
+А также и все другие страницы, на которые доступ для цензоров должен быть запрещен.
+
+Вверху вставляем такой код
+<?PHP
+require_once("/roscomsos/roscomsos.php");
+$Roscomsos=new Roscomsos();
+$check_gos_ip=$Roscomsos->check_ip($_SERVER['REMOTE_ADDR']); 
+
+if ($check_gos_ip==true) { echo 'Извините, проводятся технические работы'; exit; }
+?>
+
+------
+
+Админка для ручного обновления списка открывается по адресу ваш_сайт/roscomsos/admin.php.
+Если кракозяблы, тогда переименуйте admin_win1251.php в admin.php.
+
+
